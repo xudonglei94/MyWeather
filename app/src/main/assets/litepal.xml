@@ -4,7 +4,7 @@
     <list>
         <mapping class="org.crazyit.myweather.db.Province"/>
         <mapping class="org.crazyit.myweather.db.City"/>
-        <mapping class="org.crazyit.myweather.db.Country"/>
+        <mapping class="org.crazyit.myweather.db.County"/>
     </list>
 
 </litepal>
