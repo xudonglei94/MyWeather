@@ -7,11 +7,13 @@
     <application
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--如果仅仅修改android:icon属性但是下面这个roundIcon圆形图标属性不修改还是这个默认的话你的app图标还是以前那个默认值得!!-->
+        <!--android:roundIcon="@mipmap/ic_launcher_round"-->
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
