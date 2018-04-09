@@ -1,5 +1,6 @@
 package org.crazyit.myweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -22,6 +23,7 @@ import com.bumptech.glide.Glide;
 
 import org.crazyit.myweather.gson.Forecast;
 import org.crazyit.myweather.gson.Weather;
+import org.crazyit.myweather.service.AutoUpdateService;
 import org.crazyit.myweather.util.HttpUtil;
 import org.crazyit.myweather.util.Utility;
 import java.io.IOException;
@@ -205,5 +207,7 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+        Intent intent=new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 }
