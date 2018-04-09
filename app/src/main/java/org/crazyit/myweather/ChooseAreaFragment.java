@@ -1,8 +1,8 @@
 package org.crazyit.myweather;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
-
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,18 +14,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.crazyit.myweather.db.City;
 import org.crazyit.myweather.db.County;
 import org.crazyit.myweather.db.Province;
 import org.crazyit.myweather.util.HttpUtil;
 import org.crazyit.myweather.util.Utility;
 import org.litepal.crud.DataSupport;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -76,6 +73,13 @@ public class ChooseAreaFragment extends Fragment {
                     selectedCity=cityList.get(position);
                     queryCounties();
                 }
+                else if (currentLevel==LEVEL_COUNTY){
+                    String weatherId=countyList.get(position).getWeatherId();
+                    Intent intent=new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
             }
         });
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +94,7 @@ public class ChooseAreaFragment extends Fragment {
         });
         queryProvinces();
     }
-
+    //查询选中室内所有的县,优先从数据库查询,如果没有查询到再到服务器上查询
     private void queryCounties() {
         titleText.setText(selectedCity.getCityName());
         backButton.setVisibility(View.VISIBLE);
@@ -201,7 +205,7 @@ public class ChooseAreaFragment extends Fragment {
     private void showProgressDialog() {
         if (progressDialog==null){
             progressDialog=new ProgressDialog(getActivity());
-            progressDialog.setMessage("正在加载");
+            progressDialog.setMessage("正在加载...");
             progressDialog.setCanceledOnTouchOutside(false);
         }
         progressDialog.show();
